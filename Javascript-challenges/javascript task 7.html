@@ -1,0 +1,41 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <title>Challenge 7 - DOM</title>
+</head>
+<body>
+
+ 
+
+<input type="text" id="txtInput">
+<button  onclick="createPTag()">Click Me!</button>
+   
+<div id="updateDiv"></div> 
+
+<script>
+ // create a function that creates a paragraph
+
+ function createPTag() {
+    var comment = "woohooo! go me.";
+     var newParagraph = document.createElement('p');
+    newParagraph.textContent = comment;    
+    document.getElementById("updateDiv").appendChild(newParagraph);    
+    changeText();
+    removePTag();
+
+}
+
+  // create a function that changes the text of the paragraph tag to what is in a textbox
+  function changeText(){
+    var text = document.getElementById("txtInput").value;
+    document.getElementsByTagName("p")[0].innerText = text;
+    
+  }
+ /*function removePTag(){
+  document.getElementById("updateDiv").removeChild(newParagraph);    
+ }*/  
+  
+ 
+ </script>
+</body>
+</html>
