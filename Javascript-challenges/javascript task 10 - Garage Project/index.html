@@ -1,0 +1,122 @@
+  <!DOCTYPE html>
+  <html>
+  <head>
+    <meta charset="utf-8">
+
+    <title>Task 10 - Garage Project</title>
+
+
+  </head>
+
+  <body>
+    <script>
+  // Check in cars to the garage
+
+  var carArray=[]
+  var select;
+
+  function checkIn()
+  {
+   document.getElementById("carList").innerHTML = "";
+
+   var car = {};
+   var choices = [];
+
+   select = document.getElementById("selectVehicle"); 
+   var ckbFaults = document.getElementsByName('faults');
+   
+   for (var i=0;i<ckbFaults.length;i++){
+    if ( ckbFaults[i].checked ) {
+      choices.push(ckbFaults[i].value);
+    }
+    if ( !ckbFaults[i].checked ) {
+      choices.push(false);
+    }
+
+  }
+  
+  car.name = document.getElementById("make").value;
+  car.model = document.getElementById("model").value;   
+  car.faults =  choices;
+  carArray.push(car);
+
+// Output the content of the garage
+for (var i = 0; i < carArray.length; i++) {
+  document.getElementById("carList").innerHTML += "make: " + carArray[i].name + "model: " + carArray[i].model + "faults: " + carArray[i].faults + "<br/>";
+}
+
+for(var i = 0; i < carArray.length; i++) {
+  var opt = carArray[i];
+  var el = document.createElement("option");
+  el.textContent = opt.name + " " + opt.model;
+  el.value = opt.name;
+  select.appendChild(el);
+}
+console.log(carArray);
+}
+
+function calculate(carArray){
+
+  var basePrice = 1000;
+  var brakePrice = 234;
+  var exhaustPrice = 846;
+  var suspensionPrice = 948;
+
+
+  for (var i = 0; i < carArray.length; i++) {
+    var total = 0;
+    if(carArray[i]["faults"][0] != false){
+      total += brakePrice;
+    }
+    if(carArray[i]["faults"][1] != false){
+      total += exhaustPrice;
+    }
+    if(carArray[i]["faults"][2] != false){
+      total += suspensionPrice;
+    }
+
+    total += basePrice;
+    document.getElementById("bill").innerHTML += total;
+  } 
+
+}
+
+
+function checkOut(){
+  value = select.selectedIndex;
+  select.removeChild(select[value]);
+}
+
+
+</script>
+<form>
+  <label>Make: </label><input id="make" type=text>
+  <label>Model: <input id="model" type=text><br><br>
+    <h3>Faults:</h3>
+    <label>Breaks: </label><input name="faults" type="checkbox" value="brakes" value="1">
+    <label>Exhaust: </label><input name="faults" type="checkbox" value="exhaust" value="2">
+    <label>Suspension: </label><input name="faults" type="checkbox" value="suspension" value="3">
+    <input type=button onclick="checkIn()" value="Check-In"/>
+  </form>
+
+  <div id="container">
+    <h2>Cars</h2>
+    <div id="carList">
+    </div>
+
+
+    <input type=button onclick="calculate(carArray)" value="Calculate Bill"/>   
+    <div id="bill"></div> 
+
+
+    <div id="checkOut">
+      <h2>Check Out</h2>
+      <select id="selectVehicle">
+        <option>Choose a vehicle</option>
+      </select>
+      <br />
+      <input type=button onclick="checkOut()" value="Check-Out"/>
+    </div>
+  </div>
+</body>
+</html>

@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+
+    <title>Kings</title>
+
+   
+  </head>
+
+  <body>
+  <input type="text" id="txtInput">
+  <button  onclick="go()">Click Me!</button>
+
+  <div id="header1"></div> 
+  <div id="header2"></div> 
+  <div id="header3"></div> 
+  <div id="header4"></div> 
+
+   <script>
+
+   var kings;
+    var requestURL = "https://raw.githubusercontent.com/womackx/JSONDataRepo/master/kings.json";
+var request = new XMLHttpRequest();
+request.open('GET', requestURL, true);
+
+request.responseType = 'json'
+request.send();
+
+request.onload = function() {
+    kings = request.response;
+}
+
+function go(){
+  var valueText = document.getElementById("txtInput").value;
+      for (i = 0; i < kings.length; i++) {
+
+if (kings[i].nm == valueText){
+	document.getElementById("header1").innerHTML = kings[i].nm;
+	document.getElementById("header2").innerHTML = kings[i].cty;
+	document.getElementById("header3").innerHTML = kings[i].hse;
+	document.getElementById("header4").innerHTML = kings[i].yrs;
+}
+}
+}
+
+
+   </script>
+
+   </body>
+</html>

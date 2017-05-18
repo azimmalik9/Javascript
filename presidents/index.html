@@ -1,0 +1,45 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <title>Presidents</title>
+</head>
+<body>
+
+<h1>Presidents</h1>
+<div id="myDiv"></div>
+
+<script>
+var requestURL = "https://raw.githubusercontent.com/Brad94/presidents-data/master/presidents.txt";
+
+var request = new XMLHttpRequest();
+request.open('GET', requestURL);
+
+ request.responseType = 'text';
+request.send();
+
+request.onload = function() {
+    var csvData = request.response;
+    var csvArrs = csvData.split("\n");
+    filterByYear(csvArrs);
+        
+}
+
+
+function filterByYear(csvArrs){
+	for (var i = 0; i < csvArrs.length; i++) {
+		var stored = csvArrs[i].split(",");
+		//console.log(stored);
+		for (var j = 0; j < stored.length; j++) {
+			var stored[1] = birthList;
+			
+		}
+	}
+}
+
+
+
+</script>
+
+</script>
+</body>
+</html>
