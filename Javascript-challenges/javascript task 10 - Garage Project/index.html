@@ -45,13 +45,13 @@ for (var i = 0; i < carArray.length; i++) {
   document.getElementById("carList").innerHTML += "make: " + carArray[i].name + "model: " + carArray[i].model + "faults: " + carArray[i].faults + "<br/>";
 }
 
-for(var i = 0; i < carArray.length; i++) {
-  var opt = carArray[i];
-  var el = document.createElement("option");
-  el.textContent = opt.name + " " + opt.model;
-  el.value = opt.name;
-  select.appendChild(el);
-}
+var sel = document.getElementById('selectVehicle');
+//for(var i = 0; i < carArray.length; i++) {
+    var opt = document.createElement('option');
+    opt.innerHTML = carArray[carArray.length-1].name + " " + carArray[carArray.length-1].model;
+    opt.value = carArray[carArray.length-1].name;
+    sel.appendChild(opt);
+//}
 console.log(carArray);
 }
 
@@ -62,6 +62,8 @@ function calculate(carArray){
   var exhaustPrice = 846;
   var suspensionPrice = 948;
 
+var list = document.createElement('ul');
+  list.setAttribute("id", "listCostsUL"); 
 
   for (var i = 0; i < carArray.length; i++) {
     var total = 0;
@@ -76,9 +78,12 @@ function calculate(carArray){
     }
 
     total += basePrice;
-    document.getElementById("bill").innerHTML += total;
+    var item = document.createElement('li');
+    item.appendChild(document.createTextNode(total));
+    list.appendChild(item);
+    
   } 
-
+var cost = document.getElementById("costs").appendChild(list);
 }
 
 
@@ -89,6 +94,7 @@ function checkOut(){
 
 
 </script>
+<div id="container">
 <form>
   <label>Make: </label><input id="make" type=text>
   <label>Model: <input id="model" type=text><br><br>
@@ -99,14 +105,14 @@ function checkOut(){
     <input type=button onclick="checkIn()" value="Check-In"/>
   </form>
 
-  <div id="container">
+  
     <h2>Cars</h2>
     <div id="carList">
     </div>
 
 
     <input type=button onclick="calculate(carArray)" value="Calculate Bill"/>   
-    <div id="bill"></div> 
+    <div id="costs"></div> 
 
 
     <div id="checkOut">
